@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 import firebase_admin
+from flask_cors import CORS
 from firebase_admin import credentials, messaging
 import os
 import json
 
 app = Flask(__name__)
-
+CORS(app) 
 
 
 # Load credentials from environment variable
