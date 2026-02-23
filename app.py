@@ -1,20 +1,19 @@
 from flask import Flask, request, jsonify
-import firebase_admin
-from flask_cors import CORS
-from firebase_admin import credentials, messaging
 import os
 import json
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import firebase_admin
+from firebase_admin import credentials, messaging
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
 
-
-# Load credentials from environment variable
+# Fix the private key newlines getting escaped
 cred_json = json.loads(os.environ.get("FIREBASE_CREDENTIALS"))
+cred_json['private_key'] = cred_json['private_key'].replace('\\n', '\n')
 cred = credentials.Certificate(cred_json)
 firebase_admin.initialize_app(cred)
-
-
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({"status": "GharTak Notification Server Running!"})
