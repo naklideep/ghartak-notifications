@@ -30,14 +30,8 @@ cred = credentials.Certificate({
   "token_uri": "https://oauth2.googleapis.com/token",
 })
 
-
-
-
 firebase_admin.initialize_app(cred)
 
-# rest stays the same...
-
-firebase_admin.initialize_app(cred)
 @app.route("/", methods=["GET"])
 def home():
     return jsonify({"status": "GharTak Notification Server Running!"})
@@ -73,7 +67,3 @@ def send_notification():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
-
-
-# rest of the code stays exactly the same...
